@@ -1,6 +1,6 @@
-package com.api.apiyblas.repositories;
+package com.api.apiyblas.domain.user;
 
-import com.api.apiyblas.model.User;
+import com.api.apiyblas.domain.user.model.User;
 
 /**
  * Created by iballart on 21/11/18.

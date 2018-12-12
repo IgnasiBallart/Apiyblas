@@ -1,6 +1,5 @@
-package com.api.apiyblas.model;
+package com.api.apiyblas.domain.user.model;
 
-import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -13,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @TypeAlias("users")
 public class User {
 
-    private static final String TO_STRING_PATTERN = "%s [Internal_id: %s, Username: %s]";
+    private static final String TO_STRING_PATTERN = "%s [Username: %s, Password: %s]";
 
     public static final String COLLECTION = "users";
     public static final String FIELD_USERNAME = "username";
@@ -26,13 +25,10 @@ public class User {
     @Field(FIELD_PASSWORD)
     private String password;
 
-    @PersistenceConstructor
-    public User( String username, String password) {
-        //super(id, internalId);
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
-
 
     public String getUsername() {
         return username;
@@ -52,6 +48,6 @@ public class User {
 
     @Override
     public String toString() {
-        return String.format(TO_STRING_PATTERN, this.getClass().getSimpleName(),  getUsername());
+        return String.format(TO_STRING_PATTERN, this.getClass().getSimpleName(), getUsername(), getPassword());
     }
 }

@@ -1,7 +1,7 @@
 package com.api.apiyblas.controllers;
 
-import com.api.apiyblas.model.User;
-import com.api.apiyblas.repositories.UserRepository;
+import com.api.apiyblas.domain.user.model.User;
+import com.api.apiyblas.domain.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +25,7 @@ public class UserController {
         return userRepository.findAll();
     }
 
-    @PostMapping(path = {"", "/"})
+    @PostMapping(path = {"/save"})
     public String saveUser(@RequestBody User user) {
         userRepository.save(user);
 

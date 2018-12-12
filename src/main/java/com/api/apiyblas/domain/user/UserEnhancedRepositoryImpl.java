@@ -1,10 +1,9 @@
-package com.api.apiyblas.repositories.impl;
+package com.api.apiyblas.domain.user;
 
-//import static com.api.apiyblas.repositories.specs.UserSpecs.internalIdIs;
-import static com.api.apiyblas.repositories.specs.UserSpecs.usernameIs;
+//import static com.api.apiyblas.domain.user.specs.UserSpecs.internalIdIs;
+import static com.api.apiyblas.domain.user.specs.UserSpecs.usernameIs;
 
-import com.api.apiyblas.model.User;
-import com.api.apiyblas.repositories.UserEnhancedRepository;
+import com.api.apiyblas.domain.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Query;

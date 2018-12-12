@@ -1,6 +1,6 @@
-package com.api.apiyblas.repositories.specs;
+package com.api.apiyblas.domain.user.specs;
 
-import com.api.apiyblas.model.User;
+import com.api.apiyblas.domain.user.model.User;
 import org.springframework.data.mongodb.core.query.Criteria;
 
 /**
