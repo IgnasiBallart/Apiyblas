@@ -33,8 +33,8 @@ public class UserResourceAssembler
         return toResource(entity);
     }
 
-    public Link linkToMe() {
-        return linkTo(getControllerClass()).slash("me").withRel("me");
+    public Link linkToUser(User user) {
+        return linkTo(getControllerClass()).slash(user.getUsername()).withSelfRel();
     }
 
 }
