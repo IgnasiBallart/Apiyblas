@@ -1,8 +1,12 @@
-package com.api.apiyblas.controllers;
+package com.api.apiyblas.web.api.user;
 
 import com.api.apiyblas.domain.user.model.User;
 import com.api.apiyblas.domain.user.UserRepository;
+import com.api.apiyblas.web.api.user.resources.UserResource;
+import com.api.apiyblas.web.api.user.resources.UserResourceAssembler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -13,10 +17,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 public class UserController {
 
+    UserResourceAssembler resourceAssembler;
     UserRepository userRepository;
 
     @Autowired
-    public UserController(UserRepository userRepository) {
+    public UserController(UserResourceAssembler resourceAssembler, UserRepository userRepository) {
+        this.resourceAssembler = resourceAssembler;
         this.userRepository = userRepository;
     }
 
@@ -26,15 +32,21 @@ public class UserController {
     }
 
     @PostMapping(path = {"/save"})
-    public String saveUser(@RequestBody User user) {
+    public ResponseEntity<Resource<UserResource>> saveUser(@RequestBody User user) {
         userRepository.save(user);
+        Resource<UserResource> halUser = resourceAssembler.toHALResource(user);
+        halUser.add(resourceAssembler.linkToMe());
 
-        return user.getUsername();
+        return ResponseEntity.ok(halUser);
     }
 
-    @GetMapping(value="/{id}")
-    public User findUser(@PathVariable String id) {
-        return userRepository.findByInternalId(id);
+    @GetMapping(value="/{username}")
+    public ResponseEntity<Resource<UserResource>> findUser(@PathVariable String username) {
+
+        Resource<UserResource> halUser = resourceAssembler.toHALResource(userRepository.findByUsername(username));
+        halUser.add(resourceAssembler.linkToMe());
+
+        return ResponseEntity.ok(halUser);
     }
 /*
     @PutMapping(value="/users/{id}")
